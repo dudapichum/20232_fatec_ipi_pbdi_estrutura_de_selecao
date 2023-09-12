@@ -1,18 +1,31 @@
 DO 
 $$
 DECLARE 
-	a INT := valor_aleatorio_entre(0, 20);
-	b INT := valor_aleatorio_entre(0, 20);
-	c INT := valor_aleatorio_entre(0, 20);
+	a INT := fn_valor_aleatorio_entre(0, 20);
+	b INT := fn_valor_aleatorio_entre(0, 20);
+	c INT := fn_valor_aleatorio_entre(0, 20);
 	delta NUMERIC(10,2);
 	raizUm NUMERIC(10, 2);
 	raizDois NUMERIC(10, 2);
 BEGIN
-	IF ... THEN
-
-		
+	RAISE NOTICE'Equação: %x% + %x + % = 0', a, U&'\00B2', b, c;
+	IF a = 0 THEN
+		RAISE NOTICE 'Não é uma equação de segundo grau';
 	ELSE
-
+		--calcular delta 
+		delta := b ^ 2 - 4 * a * c;
+		--aninhado 
+		--encadeado
+		IF delta < 0 THEN
+			RAISE NOTICE 'Sem raiz';
+		ELSEIF delta = 0 THEN
+			raizUm := (-b + |/delta) / 2 * a;
+			RAISE NOTICE 'Tem uma raiz: %', raizUm;
+		ELSE
+			raizUm := (-b + |/delta) / 2 * a;
+			raizDois := (-b - |/delta) / 2 * a;
+			RAISE NOTICE 'Duas raizes: % e %', raizUm, raizDois;
+		END IF;
 	END IF;
 END
 $$
